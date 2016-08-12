@@ -10,3 +10,6 @@ build
 .DS_Store
 .vscode
 npm-debug.log
+
+# configuration
+webpack.config.js

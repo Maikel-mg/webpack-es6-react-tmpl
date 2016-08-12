@@ -1,7 +1,8 @@
-require('../css/styles.css');
+import styles from '../css/styles.css';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Content = require('./components/content.js');
+import  React from  'react';
+import  ReactDOM from 'react-dom';
+import  Content from  './components/content.js';
 
+console.log(styles);
 ReactDOM.render(<Content />, document.getElementById('content'));

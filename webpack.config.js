@@ -1,10 +1,23 @@
+var path = require('path');
+
+var APP_DIR = path.resolve(__dirname, 'src');
+var ROOT_DIR = path.resolve(__dirname);
+var BUILD_DIR = path.resolve(__dirname, 'build');  
+
 module.exports = {
-    entry : './src/index.js',
+    entry : APP_DIR + '/index.js',
     output : {
-        path : __dirname,
+        path : BUILD_DIR,
         filename : 'bundle.js'
     },
     module : {
+        preLoaders: [
+            {
+                test: /\.js?$/,
+                loaders: ['eslint'],
+                include: APP_DIR
+            }
+        ],
         loaders : [
             {
                 test : /\.css$/,

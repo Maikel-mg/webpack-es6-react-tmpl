@@ -4,17 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build.dev": "webpack --colors --progress",
-    "start.dev": "webpack --colors --progress --watch"
+    "build": "webpack --colors --progress",
+    "start": "webpack --colors --progress --watch",
+    "dev": "webpack-dev-server --port 3000 --colors",
+    "test": "webpack-dev-server --port 3000 --inline --progress --colors --output-public-path=/build/",
+    "lint": "eslint . --ext .js --ext .jsx --cache --color || true"
   },
-  "author": "",
+  "author": "Jose Miguel Merillas Granado",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "eslint": "^3.2.2",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-react": "^6.0.0",
     "style-loader": "^0.13.1"
   },
   "dependencies": {
