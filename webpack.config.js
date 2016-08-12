@@ -13,13 +13,13 @@ module.exports = {
         filename : 'bundle.js'
     },
     module : {
-        preLoaders: [
-            {
-                test: /\.js?$/,
-                loaders: ['eslint'],
-                include: APP_DIR
-            }
-        ],
+        // preLoaders: [
+        //     {
+        //         test: /\.js?$/,
+        //         loaders: ['eslint'],
+        //         include: APP_DIR
+        //     }
+        // ],
         loaders : [
             {
                 test : /\.css$/,
@@ -34,5 +34,11 @@ module.exports = {
                 }  
             }
         ]
+    },
+    resolve : {
+        alias: {
+            "ag-grid-root" : __dirname + "/node_modules/ag-grid"
+        }
     }
+    
 };

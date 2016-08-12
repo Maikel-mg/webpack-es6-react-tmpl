@@ -14,6 +14,7 @@ module.exports = {
         "strict": 0,
         "no-undef": 1,
         "no-console" : 1,
+        "no-unused-vars" : 1,
         "no-underscore-dangle": 0,
         "no-use-before-define": 0,
         "eol-last": 0,
