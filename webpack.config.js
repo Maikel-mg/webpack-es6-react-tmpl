@@ -5,9 +5,11 @@ var ROOT_DIR = path.resolve(__dirname);
 var BUILD_DIR = path.resolve(__dirname, 'build');  
 
 module.exports = {
+    devtool: 'source-map',
     entry : APP_DIR + '/index.js',
     output : {
         path : BUILD_DIR,
+        sourceMapFilename: '[file].map', 
         filename : 'bundle.js'
     },
     module : {
