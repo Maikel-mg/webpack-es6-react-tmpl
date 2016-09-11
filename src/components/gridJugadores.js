@@ -2,6 +2,11 @@ import React, {Component} from "react";
 
 import { AgGridReact } from "ag-grid-react";
 
+import dataJugadores from "./../data/jugadores.js";
+
+console.log('JUGADORES ', dataJugadores);
+
+
 class gridJugadores extends Component {
     constructor(props) {
         super(props);
@@ -10,27 +15,29 @@ class gridJugadores extends Component {
             enableFilter : true,
             quickFilterText: null,
             showGrid: true,
-            showToolPanel: true,
+            showToolPanel: false,
             columnDefs: [
-                {headerName: "Posicion", field: "posicion", width: 50},
+                {headerName: "", width: 25, checkboxSelection : true},
+                {headerName: "Pos.", field: "posicion", width: 50, cellStyle : function(param){ 
+                    switch (param.value) { 
+                        case "PT" : 
+                            return {color : 'black', backgroundColor: '#ffd800'};
+                        case "DF" : 
+                            return {color : 'white', backgroundColor: '#03a9f4'};
+                        case "DL" : 
+                            return {color : 'white', backgroundColor: '#F00'};
+                        default :
+                            return null;
+                    }
+                }},
                 {headerName: "Nombre",   field: "nombre", filter : "text", filterParams: {apply: true, newRowsAction: 'keep'}, width: 150},
-                {headerName: "Equipo",   field: "equipo", filter : "set", width: 150},
-                {headerName: "Valor",    field: "valor",  filter : "number", width: 100},
+                {headerName: "Equipo",   field: "equipo", filter : "set", width: 150 },
+                {headerName: "Puntos",   field: "puntos", filter : "number", width: 150 },
+                {headerName: "Valor",    field: "valor",  filter : "number", width: 100, editable: true},
+                {headerName: "Valor Máx.", width: 100, valueGetter: "data.valor * 1.35" }
+
             ],
-            rowData: [
-                {
-                    posicion : "PT",
-                    nombre : "Pacheco",
-                    equipo : "Aláves",
-                    valor : 1000000
-                },
-                {
-                    posicion : "DF",
-                    nombre : "MARCELO",
-                    equipo : "Real Madrid",
-                    valor : 8000000
-                }
-            ],
+            rowData: dataJugadores,
             icons: {
                 columnRemoveFromGroup: '<i class="fa fa-remove"/>',
                 filter: '<i class="fa fa-filter"/>',
@@ -57,7 +64,7 @@ class gridJugadores extends Component {
 
                     showToolPanel={this.state.showToolPanel}
                     quickFilterText={this.state.quickFilterText}
-                    icons={this.state.icons}
+                    //icons={this.state.icons}
 
                     // column definitions and row data are immutable, the grid
                     // will update when these lists change
@@ -69,33 +76,29 @@ class gridJugadores extends Component {
                     //rowSelection="multiple"
                     enableSorting="true"
                     //enableFilter="true"
+                    groupHeaders = "true"
                     rowHeight="22"
                 />
             </div>
         );
     }
     onGridReady(params) {
-        
         this.api = params.api;
         this.columnApi = params.columnApi;
-
-        setInterval(this.logRows.bind(this), 10000);
     }
     logRows (){
-        //console.log('SELECTED ROWS', this.api.getSelectedRows())
-        //this.api.sizeColumnsToFit();
-        
         var sumaValorSeleccionado = 0;
         var selected = this.api.getSelectedRows();
+
         selected.forEach(function (r) {
             sumaValorSeleccionado = sumaValorSeleccionado + r.valor;
         });
 
-        console.log(sumaValorSeleccionado);
+        this.props.onUpdate(sumaValorSeleccionado);
     }
     createRow(){
         var rows = this.state.rowData;
-        rows.push({posicion : 'DL', nombre: 'Lucas Perez', equipo : 'Deportivo', valor: 13000000});
+        rows.push({posicion : 'DL', nombre: 'Lucas Perez', equipo : 'Deportivo', puntos : 15, valor: 13000000});
 
         this.setState({ rowData : rows.concat([])});
     }

@@ -5,8 +5,10 @@ import cssGridThme from 'ag-grid-root/dist/styles/theme-fresh.css';
 
 import  React from  'react';
 import  ReactDOM from 'react-dom';
-//import  Content from  './components/content.js';
-import GridJugadores from './components/gridJugadores';
+
+//import App from './components/app';
+//ReactDOM.render(<div> <App /></div>, document.getElementById('content'));
+import Screencast from './components/screencast';
+ReactDOM.render(<Screencast txt="Maikel"/>, document.getElementById('content'));
 
 
-ReactDOM.render(<GridJugadores />, document.getElementById('content'));
