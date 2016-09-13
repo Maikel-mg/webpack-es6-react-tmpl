@@ -1,51 +1,47 @@
 import React, {Component} from "react";
 import ReactDOM from 'react-dom';
 
-import GridJugadores from './gridJugadores';
-import SumaValores from './sumaValores';
+import GridResumenMensual from './gridResumenMensual';
 
 import Api from './../data/api';
+import dataResumenMensual from "./../data/resumenMensual.js";
 
 
 class App extends Component {
     constructor(props){
         super(props);
-        this.update = this.update.bind(this);
-
         var api = new Api();
 
-        console.log('API', api.jugadoresPorPosicion('DF'));
-
         this.state = {
-            jugadores : [],
-            sumaValores : 12000
+            clientes : dataResumenMensual,
+            mesesConResultado : 7,
+            mesesAProyectar : 5
         };
     }
 
     render() {
         return (
-            <div id="appContainer">
-                <GridJugadores ref="gridJugadores" onUpdate={this.update}/> 
-                <SumaValores ref="sumaValores" suma={this.state.sumaValores} />
-                <button onClick={this.onClick.bind(this)}>Maikel</button> 
-            </div>
+            <div className="appContainer">
+              <nav className="navbar navbar-default">
+                <div className="container-fluid">
+                    <div className="navbar-header">
+                    </div>
+                    <ul className="nav navbar-nav">
+                        <li className="active"><a href="#">Resumen Mensual</a></li>
+                        <li><a href="#">Top 10 Clientes</a></li>
+                    </ul>
+                </div>
+            </nav>
+                <div id="appContainer" className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-12" style={{"marginTop": "15px"}}>
+                            <GridResumenMensual ref="gridResumenMensual" dataResumenMensual={this.state.clientes} />
+                        </div>
+                    </div> 
+                </div>
+            </div> 
+            
         );
-    }
-
-    update(sumaValoresSeleccionados) {
-        console.log('THIS  ', this);
-        console.log('UPDATE .. ', this.state);
-    
-        this.setState({
-            sumaValores : sumaValoresSeleccionados
-        });
-
-        this.refs.sumaValores.setState({suma : sumaValoresSeleccionados});
-
-    }
-
-    onClick() {
-        this.refs.gridJugadores.createRow();
     }
 }
 
