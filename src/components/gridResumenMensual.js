@@ -6,18 +6,7 @@ import numeral from "numeral";
 class gridResumenMensual extends Component {
     constructor(props) {
         super(props);
-
-        console.log(props);
-
-        this.modoAvanzado = this.modoAvanzado.bind(this);
         this.onGridReady = this.onGridReady.bind(this);
-
-        this.calculateIngresoMedioMensual = this.calculateIngresoMedioMensual.bind(this);
-        this.calculateProyeccion = this.calculateProyeccion.bind(this);
-        this.calculateDesviacionProyectadoPresupuesto = this.calculateDesviacionProyectadoPresupuesto.bind(this);
-        this.desviacionProyeccionStyle = this.desviacionProyeccionStyle.bind(this);
-        this.clienteStyle = this.clienteStyle.bind(this);
-        this.autoSize = this.autoSize.bind(this);
 
         this.state = {
             mesesConResultado : 7,
@@ -34,33 +23,138 @@ class gridResumenMensual extends Component {
                 {
                     headerName: "GENERAL", 
                     children : [
-                        {headerName: "Cliente", field: "cliente", width: 150, pinned: 'left', filter : "text", cellStyle : this.clienteStyle },
-                        {headerName: "Notas",   field: "descripcion", width: 150, pinned: 'left', filter : "text"},
+                        {   
+                            headerName: "Cliente", 
+                            field: "cliente", 
+                            width: 150, 
+                            pinned: 'left',
+                            filter : "text", 
+                            cellStyle : this.clienteStyle 
+                        },
+                        {
+                            headerName: "Notas",   
+                            field: "descripcion", 
+                            width: 150, 
+                            pinned: 'left', 
+                            filter : "text"
+                        },
                     ]
                 },
                 {
                     headerName: "PRESUPUESTADO",
                     children : [
-                        {headerName: "2016", field: "presupuestado", width: 100, pinned: 'left', filter : "number", cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
-                        {headerName: "2015", columnGroupShow: 'open', width: 100, pinned: 'left', filter : "number", cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
-                        {headerName: "2014",columnGroupShow: 'open', width: 100, pinned: 'left', filter : "number", cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
-                        {headerName: "2013",columnGroupShow: 'open', width: 100, pinned: 'left', filter : "number", cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
-                        {headerName: "2012",columnGroupShow: 'open', width: 100, pinned: 'left', filter : "number", cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
+                        {
+                            headerName: "2016", 
+                            field: "presupuestado",
+                            width: 100, 
+                            pinned: 'left', 
+                            filter : "number", 
+                            cellStyle : {
+                                "text-align" : "right"
+                            }, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
+                        {
+                            headerName: "2015", 
+                            columnGroupShow: 'open', 
+                            width: 100, 
+                            pinned: 'left', 
+                            filter : "number",
+                            cellStyle : {
+                                "text-align" : "right"
+                            }, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
+                        {
+                            headerName: "2014",
+                            columnGroupShow: 'open', 
+                            width: 100, 
+                            pinned: 'left', 
+                            filter : "number", 
+                            cellStyle : {
+                                "text-align" : "right"
+                            }, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
+                        {
+                            headerName: "2013",
+                            columnGroupShow: 'open', 
+                            width: 100, 
+                            pinned: 'left', 
+                            filter : "number",
+                            cellStyle : {
+                                "text-align" : "right"
+                            }, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
+                        {
+                            headerName: "2012",
+                            columnGroupShow: 'open', 
+                            width: 100, 
+                            pinned: 'left', 
+                            filter : "number", 
+                            cellStyle : {
+                                "text-align" : "right"
+                            }, 
+                            cellRenderer: this.numberCellRenderer },
                     ]
                 },
                 {
                     headerName: "INGRESADO",
                     children : [
-                        {headerName: "Actual", headerTooltip:"Ingresado hasta el momento", filter : "number", width: 80, pinned: 'left',  valueGetter: this.calculateIngresado, cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
-                        {headerName: "Media Mensual", headerTooltip:"Ingreso Medio Mensual", filter : "number", width: 80, pinned: 'left', cellStyle : {"text-align" : "right" },  valueGetter: this.calculateIngresoMedioMensual,  cellRenderer: this.numberCellRenderer },
+                        {
+                            headerName: "Actual",
+                            headerTooltip:"Ingresado hasta el momento",
+                            field : "ingresadoTotal", 
+                            filter : "number", 
+                            width: 80, 
+                            pinned: 'left',  
+                            cellStyle : {"text-align" : "right"}, 
+                            cellRenderer: this.numberCellRenderer },
+                        {
+                            headerName: "Media Mensual", 
+                            headerTooltip:"Ingreso Medio Mensual",
+                            field : "ingresadoMediaMensual", 
+                            filter : "number", 
+                            width: 80, 
+                            pinned: 'left', 
+                            cellStyle : {"text-align" : "right" }, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
                     ]
                 },
                 {
                     headerName: "CALCULOS", 
                     children : [
-                        {headerName: "Proyeccion", filter : "number", width: 100, pinned: 'left',  valueGetter: this.calculateProyeccion, cellStyle : {"text-align" : "right"}, cellRenderer: this.numberCellRenderer },
-                        {colId : 'DesvIngPre', headerName: "Desviación Ingresado/Presupuestado", filter : "number", width: 100, pinned: 'left',  valueGetter: this.calculateDesviacionIngresoPresupuesto, cellStyle : this.desviacionIngresadoStyle, cellRenderer: this.numberCellRenderer },
-                        {colId : 'DesvProPre', headerName: "Desviación Proyeccion/Presupuesto",  filter : "number", width: 100, pinned: 'left',  valueGetter: this.calculateDesviacionProyectadoPresupuesto, cellStyle : this.desviacionProyeccionStyle, cellRenderer: this.numberCellRenderer },
+                        {
+                            headerName: "Proyeccion", 
+                            field : "proyeccion",
+                            filter : "number", 
+                            width: 100, 
+                            pinned: 'left',  
+                            cellStyle : {"text-align" : "right"}, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
+                        {
+                            colId : 'DesvIngPre', 
+                            field : 'desviacionIngresadoPresupuestado',
+                            headerName: "Desviación Ingresado/Presupuestado", 
+                            filter : "number", 
+                            width: 100, 
+                            pinned: 'left',  
+                            cellStyle : this.desviacionIngresadoStyle, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
+                        {
+                            colId : 'DesvProPre', 
+                            field : 'desviacionProyeccionPresupuestado',
+                            headerName: "Desviación Proyeccion/Presupuesto",  
+                            filter : "number", 
+                            width: 100, 
+                            pinned: 'left', 
+                            cellStyle : this.desviacionProyeccionStyle, 
+                            cellRenderer: this.numberCellRenderer 
+                        },
                     ]
                 },
                 {
@@ -86,56 +180,39 @@ class gridResumenMensual extends Component {
         };        
     }
 
-    numberCellRenderer (params) {
-        if (params.value === 0) {
-            return "--";
-        } else {
-            return numeral(params.value).format("0,0.00");
-        }
+    render() {
+        return (
+            <div style={{height: '80%', fontSize : "12px"}} className="ag-fresh">
+                <AgGridReact
+                    onGridReady = {this.onGridReady}
+                    rowSelection = {this.state.rowSelection}
+                    showToolPanel={this.state.showToolPanel}
+                    quickFilterText={this.state.quickFilterText}
+                    columnDefs={this.state.columnDefs}
+                    rowData={this.props.dataResumenMensual}
+                    floatingBottomRowData={this.getBottomData(this.props.dataResumenMensual)}
+                    enableColResize = {this.state.enableColResize}
+                    enableSorting= {this.state.enableSorting}
+                    enableFilter = {this.state.enableFilter}
+                    rowHeight="20"
+                />
+            </div>
+        );
     }
-
-    
-    calculateDesviacionIngresoPresupuesto (row) {
-        let arrayMeses = Object.keys(row.data.ingresado).map((k) => row.data.ingresado[k]);
-        let sumaIngresado =  arrayMeses.reduce((a, b) => a + b, 0);
-        return numeral(sumaIngresado - row.data.presupuestado).format('0.0,00');
+    // EVENTOS
+    onGridReady(params) {
+        this.api = params.api;
+        this.columnApi = params.columnApi;
     }
-    calculateDesviacionProyectadoPresupuesto (row) {
-       let proyeccion = this.calculateProyeccion(row);
-
-       return numeral(proyeccion - row.data.presupuestado).format('0.0,00');
-    }
-    calculateIngresado (row) {
-        let arrayMeses = Object.keys(row.data.ingresado).map((k) => row.data.ingresado[k]);
-        let sumaIngresado =  arrayMeses.reduce((a, b) => a + b, 0);
-
-        return numeral(sumaIngresado).format('0.0,00');
-    }
-    calculateIngresoMedioMensual (row) {
-        let arrayMeses = Object.keys(row.data.ingresado).map((k) => row.data.ingresado[k]);
-        let sumaIngresado =  arrayMeses.reduce((a, b) => a + b, 0);
-
-        if(sumaIngresado > 0) {
-            return numeral(sumaIngresado / this.state.mesesConResultado).format('0.0,00');
-        } else {
-            return numeral(0).format('0.0,00'); 
-        }
-    }
-    calculateProyeccion (row){
-        let arrayMeses = Object.keys(row.data.ingresado).map((k) => row.data.ingresado[k]);
-        let sumaIngresado =  arrayMeses.reduce((a, b) => a + b, 0);
-
-        if (this.state.mesesConResultado <= 6) {
-            return sumaIngresado + (sumaIngresado / this.state.mesesConResultado) * ( this.state.mesesAProyectar - 1)
-        } else if (this.state.mesesConResultado === 7) { 
-            return sumaIngresado + (sumaIngresado / 6.5) * ( this.state.mesesAProyectar - 0.5) // en base 12
-        } else if (this.state.mesesConResultado > 7) { 
-            return sumaIngresado + (sumaIngresado / 7) * ( this.state.mesesAProyectar)
-        } 
-    }
+    //FUNCIONES 
     getBottomData (data) {
         let newData = [{
             presupuestado : data.map(function (fila) { return fila.presupuestado; }).reduce((a, b) => a + b, 0),
+            ingresadoTotal : data.map(function (fila) { return fila.ingresadoTotal; }).reduce((a, b) => a + b, 0),
+            ingresadoMediaMensual : data.map(function (fila) { return fila.ingresadoMediaMensual; }).reduce((a, b) => a + b, 0),
+            proyeccion : data.map(function (fila) { return fila.proyeccion; }).reduce((a, b) => a + b, 0),
+            desviacionIngresadoPresupuestado : data.map(function (fila) { return fila.desviacionIngresadoPresupuestado; }).reduce((a, b) => a + b, 0),
+            desviacionProyeccionPresupuestado : data.map(function (fila) { return fila.desviacionProyeccionPresupuestado; }).reduce((a, b) => a + b, 0),
             ingresado : {
                 enero : data.map(function (fila) { return fila.ingresado.enero; }).reduce((a, b) => a + b, 0),
                 febrero : data.map(function (fila) { return fila.ingresado.febrero; }).reduce((a, b) => a + b, 0),
@@ -154,73 +231,36 @@ class gridResumenMensual extends Component {
 
         return newData;
     }
-     clienteStyle (params) {
-        let proyectado = this.calculateProyeccion(params);
-
-        if (proyectado - params.data.presupuestado < 0) {
+    // ESTILOS Y RENDERERS DEL GRID
+    clienteStyle (params) {
+        if (params.data.proyeccion - params.data.presupuestado < 0) {
             return {color: 'red'};
         }
     }
     desviacionIngresadoStyle (params) {
-        let arrayMeses = Object.keys(params.data.ingresado).map((k) => params.data.ingresado[k]);
-        let sumaIngresado =  arrayMeses.reduce((a, b) => a + b, 0);
-
-        if (sumaIngresado - params.data.presupuestado > 0) {
+        if (params.data.desviacionIngresadoPresupuestado > 0) {
             return {textAlign : "right", backgroundColor: '#def7de'};
-        } else if (sumaIngresado - params.data.presupuestado < 0) {
+        } else if (params.data.desviacionIngresadoPresupuestado < 0) {
             return {textAlign : "right", backgroundColor: '#f7dede'};
         } else {
             return {textAlign : "right"};
         }  
     }
     desviacionProyeccionStyle (params) {
-        let proyectado = this.calculateProyeccion(params);
-
-        if (proyectado - params.data.presupuestado > 0) {
+        if (params.data.desviacionProyeccionPresupuestado > 0) {
             return {textAlign : "right", backgroundColor: '#def7de'};
-        } else if (proyectado - params.data.presupuestado < 0) {
+        } else if (params.data.desviacionProyeccionPresupuestado < 0) {
             return {textAlign : "right", backgroundColor: '#f7dede'};
         } else {
             return {textAlign : "right"};
         }  
     }
-    autoSize () {
-        var allColumnIds = [];
-        var _this = this;
-        this.state.columnDefs.forEach( function(columnDef) {
-            columnDef.children.forEach( function(columnDef2) {
-                _this.columnApi.autoSizeColumn(columnDef2);
-            });
-        });
-    }
-    modoAvanzado () {
-        console.log('modoAvanzado', this);
-        this.columnApi.setColumnVisible('DesvIngPre', false);
-        this.columnApi.setColumnVisible('DesvProPre', false);
-    }
-    render() {
-        return (
-            <div style={{height: '80%', fontSize : "13px"}} className="ag-fresh">
-                <AgGridReact
-                    onGridReady = {this.onGridReady}
-                    rowSelection = {this.state.rowSelection}
-                    showToolPanel={this.state.showToolPanel}
-                    quickFilterText={this.state.quickFilterText}
-                    columnDefs={this.state.columnDefs}
-                    rowData={this.state.rowData}
-                    floatingBottomRowData={this.state.floatingBottomRowData}
-                    enableColResize = {this.state.enableColResize}
-                    enableSorting= {this.state.enableSorting}
-                    enableFilter = {this.state.enableFilter}
-                    rowHeight="20"
-                />
-            </div>
-        );
-    }
-    onGridReady(params) {
-        console.log('onGridReady', this);
-        this.api = params.api;
-        this.columnApi = params.columnApi;
+    numberCellRenderer (params) {
+        if (params.value === 0) {
+            return "--";
+        } else {
+            return numeral(params.value).format("0,0.00");
+        }
     }
 }
 

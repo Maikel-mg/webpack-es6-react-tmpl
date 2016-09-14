@@ -1,46 +1,36 @@
 import React, {Component} from "react";
-import ReactDOM from 'react-dom';
 
-import GridResumenMensual from './gridResumenMensual';
+import Navegacion from './navegacion';
+import PageTopClientes from './pageTopClientes';
+import PageResumenMensual from './pageResumenMensual';
 
-import Api from './../data/api';
-import dataResumenMensual from "./../data/resumenMensual.js";
+import dataHelper from './../data/dataHelper';
 
+const MESES_CON_RESULTADO = 7;
+const MESES_A_PROYECTAR = 5;
 
 class App extends Component {
     constructor(props){
         super(props);
-        var api = new Api();
 
         this.state = {
-            clientes : dataResumenMensual,
-            mesesConResultado : 7,
-            mesesAProyectar : 5
+            clientes : []
         };
     }
-
+    componentDidMount () {
+        this.setState({
+            clientes : dataHelper.procesarDatos(MESES_CON_RESULTADO, MESES_A_PROYECTAR)
+        });
+    }
     render() {
         return (
             <div className="appContainer">
-              <nav className="navbar navbar-default">
+                <Navegacion /> 
                 <div className="container-fluid">
-                    <div className="navbar-header">
-                    </div>
-                    <ul className="nav navbar-nav">
-                        <li className="active"><a href="#">Resumen Mensual</a></li>
-                        <li><a href="#">Top 10 Clientes</a></li>
-                    </ul>
-                </div>
-            </nav>
-                <div id="appContainer" className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-12" style={{"marginTop": "15px"}}>
-                            <GridResumenMensual ref="gridResumenMensual" dataResumenMensual={this.state.clientes} />
-                        </div>
-                    </div> 
+                    <PageResumenMensual data={this.state.clientes} />
+                    <PageTopClientes data={dataHelper.getTopClientes(this.state.clientes, 10)}/>
                 </div>
             </div> 
-            
         );
     }
 }
