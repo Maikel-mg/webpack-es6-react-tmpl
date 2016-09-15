@@ -4,8 +4,8 @@ import { AgGridReact } from "ag-grid-react";
 import numeral from "numeral";
 
 class gridResumenMensual extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.onGridReady = this.onGridReady.bind(this);
 
         this.state = {
@@ -182,7 +182,7 @@ class gridResumenMensual extends Component {
 
     render() {
         return (
-            <div style={{height: '80%', fontSize : "12px"}} className="ag-fresh">
+            <div style={{height: '80%', fontSize : "12px"}} className="ag-fresh ag-ipartek">
                 <AgGridReact
                     onGridReady = {this.onGridReady}
                     rowSelection = {this.state.rowSelection}
