@@ -1,17 +1,106 @@
 body {
     background: #F8F8F8;
+    background: white;
 }
 
-.navbar-default {
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
+.navbar {
+    background-color: #2a6496;
+    border-radius: 0px;
+    border-style: none;
+    border-bottom: 5px solid #2196f3;
+    color : white;
+    font-weight: 600;
+    height: 50px;
+    margin-bottom: 0px;
+    margin-bottom: 0;
+    min-height: 50px;
+}
+
+.navbar>li>a {
+    color : white;
 }
 
 .navbar-inverse .navbar-nav,
 .navbar-inverse .navbar-nav > li > a,
 .navbar-inverse .navbar-nav > li > span,
-.navbar-inverse .navbar-nav > li > i,
-.navbar-inverse .navbar-header > li > span {
+.navbar-inverse .navbar-nav > li > i {
     color: #FFF;
-    font-weight: bold;
+}
+
+.nav-controls {
+  /*display: inline-block;*/
+  padding: 11px 0;
+}
+
+.nav-links {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: auto;
+}
+
+.nav-links li{
+    display: inline-block;
+}
+
+/*.nav-links li a{
+    display: inline-block;
+    padding: 16px 14px 11px 14px;
+    margin-bottom: -1px;
+    font-size: 15px;
+    line-height: 28px;
+    color: #959494;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+}*/
+
+.nav-links li.active a{
+  border-bottom: 2px solid #20416c;
+  border-bottom: 2px solid #4a8bee;
+  color : #000;
+}
+
+.navbar-inverse .navbar, 
+.navbar-inverse .navbar-brand {
+  color: #fff;  
+}
+
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+
+/* 
+    CUSTOM
+*/ 
+.pageHeader {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #e8e8e8;
+}
+
+.pageHeader h2 {
+    font-size: 22px;
+    margin: 15px;
+    text-transform: uppercase;
+}
+
+.pageHeader .fa {
+    padding-right: 15px;
+}
+
+.nav .fa {
+    padding-right: 5px;
+}
+
+.ag-ipartek .ag-header {
+    color: #000;
+    background: #f7f7f7 !important;
+    border-bottom: 1px solid #808080;
+    font-weight: normal;
 }

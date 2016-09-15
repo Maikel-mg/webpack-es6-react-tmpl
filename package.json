@@ -7,7 +7,7 @@
     "build": "webpack --colors --progress",
     "start": "webpack --colors --progress --watch",
     "dev": "webpack-dev-server --port 3000 --colors",
-    "test": "webpack-dev-server --port 3000 --inline --progress --colors --output-public-path=/build/",
+    "test": "webpack-dev-server --port 3000 --inline --progress --colors --output-public-path=/build/ --history-api-fallback",
     "lint": "eslint . --ext .js --ext .jsx --cache --color || true"
   },
   "author": "Jose Miguel Merillas Granado",
@@ -32,6 +32,7 @@
     "numeral": "^1.5.3",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-router": "^2.8.1",
     "recharts": "^0.14.1"
   }
 }

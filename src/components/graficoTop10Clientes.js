@@ -23,4 +23,6 @@ GraficoTop10Clientes.propTypes = {
      data : PropTypes.array.isRequired
 };
 
+
+
 export default GraficoTop10Clientes;
