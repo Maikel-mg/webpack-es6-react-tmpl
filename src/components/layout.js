@@ -14,6 +14,8 @@ class Layout extends Component {
         this.state = {
             clientes : []
         };
+
+        console.log('TOTALES', dataHelper.datosProyeccion(dataHelper.procesarDatos(MESES_CON_RESULTADO, MESES_A_PROYECTAR)));
     }
     componentDidMount () {
         this.setState({
