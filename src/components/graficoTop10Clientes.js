@@ -11,7 +11,7 @@ class GraficoTop10Clientes extends Component {
                         <YAxis/>
                         <CartesianGrid strokeDasharray="2 2"/>
                         <Tooltip/>
-                        <Bar dataKey="ingresadoTotal" fill="#4caf50" label/>
+                        <Bar dataKey="ingresado" fill="#4caf50" label/>
                     </BarChart>
                 </div>
             </div>

@@ -3,9 +3,29 @@ import React, {Component, PropTypes} from 'react';
 import GridTopClientes from './gridTopClientes';
 import GraficoTop10Clientes from './graficoTop10Clientes';
 
-import dataHelper from './../data/dataHelper';
-
 class PageTopClientes extends Component {
+     constructor(){
+        super();
+
+        this.state = {
+            datos : []
+        };
+    }
+    componentWillMount () {
+        fetch("http://localhost:60771/api/estadisticas/TopClientes/2016/10")
+            .then((response) => {
+            return response.json()
+        })
+        .then((TopClientes) => {
+            console.log('TOPCLIENTES ', TopClientes);
+            this.setState({
+                datos : TopClientes
+            });
+        })
+        .catch((error) => {
+            console.log('ERROR', error)
+        });
+    }
     render() {
         return (
             <div className="pageTopClientes">
@@ -18,20 +38,16 @@ class PageTopClientes extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-2 col-md-offset-1" style={{"marginTop": "15px"}}>
-                        <GridTopClientes ref="gridTopClientes" data={dataHelper.getTopClientes(this.context.data, 10)} />
+                        <GridTopClientes ref="gridTopClientes" data={this.state.datos} />
                     </div>
                     <div className="col-md-8 col-md-offset-1" style={{"marginTop": "15px"}}>
-                        <GraficoTop10Clientes ref="graficoTop10Clientes" data={dataHelper.getTopClientes(this.context.data, 10)} />
+                        <GraficoTop10Clientes ref="graficoTop10Clientes" data={this.state.datos} />
                     </div>
                 </div>                  
             </div>
         );
     }
 }
-
-PageTopClientes.contextTypes = {
-    data : PropTypes.array.isRequired
-};
 
 export default PageTopClientes;
 

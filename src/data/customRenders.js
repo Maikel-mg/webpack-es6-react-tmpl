@@ -12,7 +12,7 @@ function percentCellRenderer (params) {
     if (params.value === 0) {
         return "--";
     } else {
-        return numeral(params.value).format("0 %");
+        return numeral(params.value).format("0.00 %");
     }
 }
 

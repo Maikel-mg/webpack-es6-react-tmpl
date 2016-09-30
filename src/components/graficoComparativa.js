@@ -12,8 +12,8 @@ class GraficoComparativa extends Component {
                         <CartesianGrid strokeDasharray="2 2"/>
                         <Tooltip/>
                         <Legend verticalAlign="top" height={75} />
-                        <Line type="monotone" dataKey="presupuesto" stroke="#8884d8" activeDot={{r: 8}}/>
-                        <Line type="monotone" dataKey="proyeccion" stroke="#82ca9d"  activeDot={{r: 8}}/>
+                        <Line type="monotone" dataKey="presupuestado" stroke="#8884d8" activeDot={{r: 8}}/>
+                        <Line type="monotone" dataKey="proyectado" stroke="#82ca9d"  activeDot={{r: 8}}/>
                     </LineChart>
                 </div>
             </div>

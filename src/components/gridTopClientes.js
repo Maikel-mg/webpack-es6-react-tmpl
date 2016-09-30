@@ -6,14 +6,13 @@ import customRenders from "./../data/customRenders.js";
 class GridTopClientes extends Component {
     constructor (props) {
         super(props);
-        this.porcentajeSobreTotal = this.porcentajeSobreTotal.bind(this);
 
         this.state = {
             columnDefs : [
                 {
                     headerName : 'Horas',
-                    field : 'ingresadoTotal',
-                    width : 80,
+                    field : 'ingresado',
+                    width : 100,
                     sort : 'desc',
                     cellStyle : {"text-align" : "right"},
                     cellRenderer: customRenders.numberCellRenderer
@@ -21,21 +20,21 @@ class GridTopClientes extends Component {
                 {
                     headerName : 'Cliente',
                     field : 'cliente',
-                    width : 150
+                    width : 200
                 },
                 {
                     headerName : '%',
-                    width : 50,
-                    valueGetter : this.porcentajeSobreTotal,
+                    width : 100,
+                    field : 'porcentaje',
                     cellStyle : {"text-align" : "right"},
-                    cellRenderer: customRenders.percentCellRenderer
+                    cellRenderer: customRenders.numberCellRenderer
                 }
             ]
         };
     }
     render() {
         return (
-             <div style={{height: (this.props.data.length + 2) * 30, width: 282, fontSize : "15px"}} className="ag-fresh">
+             <div style={{height: (this.props.data.length + 2) * 30, width: 405, fontSize : "15px"}} className="ag-fresh">
                 <AgGridReact
                     columnDefs={this.state.columnDefs}
                     rowData={this.props.data}
@@ -45,21 +44,6 @@ class GridTopClientes extends Component {
             </div>
         );
     }
-
-    porcentajeSobreTotal (row) {
-        let sumaHoras = this.calculateTotalHoras(this.props.data);
-        let actualSobreTotal = (row.data.ingresadoTotal * 100 / sumaHoras) / 100;
-        
-        return actualSobreTotal;   
-    }
-    calculateTotalHoras (datos) {
-        return datos.map(function (element) { return element.ingresadoTotal;}).reduce((a, b) => a + b, 0);
-    }
-    
 }
-
-GridTopClientes.propTypes = {
-    data : PropTypes.array.isRequired
-};
 
 export default GridTopClientes;
