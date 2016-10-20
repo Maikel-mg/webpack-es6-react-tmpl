@@ -35,6 +35,7 @@ class Navegacion extends Component {
                                 <strong> <i className="fa fa-table"></i> Clientes</strong>
                             </Link>
                         </li>
+
                     </ul>
                 </div>
             </nav> 

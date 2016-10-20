@@ -26,11 +26,12 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
-    "ag-grid": "5.0.x",
-    "ag-grid-react": "5.0.x",
+    "ag-grid": "6.2.x",
+    "ag-grid-react": "6.2.x",
     "moment": "^2.15.0",
     "numeral": "^1.5.3",
     "react": "^15.1.0",
+    "react-bootstrap": "^0.30.5",
     "react-dom": "^15.1.0",
     "react-router": "^2.8.1",
     "recharts": "^0.14.1"
