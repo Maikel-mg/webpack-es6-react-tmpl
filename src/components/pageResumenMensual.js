@@ -1,30 +1,34 @@
 import React, {Component, PropTypes} from "react";
 
 import GridResumenMensual from './gridResumenMensual';
+import EstadisticasService from './../services/estadisticas.js';
 
 class PageResumenMensual extends Component {
     constructor(){
         super();
+        
+        console.log('EstadisticasService', EstadisticasService);
 
         this.state = {
             datos : []
         };
     }
     componentWillMount () {
-        fetch("http://localhost:60771/api/estadisticas/ResumenMensual/2016")
-            .then((response) => {
-            return response.json()
-        })
-        .then((ResumenMensual) => {
-            console.log(ResumenMensual);
-            this.setState({
-                datos : ResumenMensual
+        EstadisticasService
+            .resumenMensual(2016)
+            .then((ResumenMensual) => {
+                console.log(ResumenMensual);
+                this.setState({
+                    datos : ResumenMensual.data
+                });
+            })
+            .catch((error) => {
+                console.log('ERROR', error)
             });
-        })
-        .catch((error) => {
-            console.log('ERROR', error)
-        });
     }
+
+
+
     render() {
         if (this.state.datos.length > 0) {
             return (
