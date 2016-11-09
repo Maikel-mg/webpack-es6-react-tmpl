@@ -30,6 +30,12 @@ class Navegacion extends Component {
                                 <strong> <i className="fa fa-bar-chart"></i> Comparativa</strong>
                             </Link>
                         </li>
+                         <li>
+                            <Link to={"Clientes"} activeStyle={estilos}>
+                                <strong> <i className="fa fa-table"></i> Clientes</strong>
+                            </Link>
+                        </li>
+
                     </ul>
                 </div>
             </nav> 

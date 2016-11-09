@@ -5,6 +5,8 @@ import Layout from './layout';
 import PageTopClientes from './pageTopClientes';
 import PageResumenMensual from './pageResumenMensual';
 import PageComparativaPresupuesto from './PageComparativaPresupuesto';
+import PageMaestroClientes from './PageMaestroClientes';
+
 
 class App extends Component {
     
@@ -15,6 +17,7 @@ class App extends Component {
                     <Route path={"ResumenMensual"} component={PageResumenMensual} />
                     <Route path={"TopClientes"} component={PageTopClientes} />
                     <Route path={"Comparativa"} component={PageComparativaPresupuesto} />
+                    <Route path={"Clientes"} component={PageMaestroClientes} />
                 </Route>
              </Router>
         );

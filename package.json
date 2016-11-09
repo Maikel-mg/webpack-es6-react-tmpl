@@ -26,13 +26,17 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
-    "ag-grid": "5.0.x",
-    "ag-grid-react": "5.0.x",
+    "ag-grid": "6.2.x",
+    "ag-grid-react": "6.2.x",
+    "axios": "^0.15.2",
     "moment": "^2.15.0",
     "numeral": "^1.5.3",
     "react": "^15.1.0",
+    "react-bootstrap": "^0.30.5",
+    "react-contextmenu": "^1.6.3",
     "react-dom": "^15.1.0",
     "react-router": "^2.8.1",
+    "react-select": "^1.0.0-rc.2",
     "recharts": "^0.14.1"
   }
 }

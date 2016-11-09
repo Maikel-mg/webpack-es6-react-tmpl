@@ -260,7 +260,7 @@ class gridResumenMensual extends Component {
         }  
     }
     numberCellRenderer (params) {
-        if (params.value === 0) {
+        if (params.value === 0 || params.value === null || params.value === undefined) {
             return "--";
         } else {
             return numeral(params.value).format("0,0.00");

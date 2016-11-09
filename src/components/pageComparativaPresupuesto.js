@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import GraficoComparativa from './graficoComparativa';
+import EstadisticasService from './../services/estadisticas'
 
 class PageComparativaPresupuesto extends Component {
      constructor(){
@@ -11,13 +12,11 @@ class PageComparativaPresupuesto extends Component {
         };
     }
     componentWillMount () {
-        fetch("http://localhost:60771/api/estadisticas/ComparativaIngresadoProyeccion/2016")
-            .then((response) => {
-            return response.json()
-        })
+        EstadisticasService.
+        comparativaProyeccionPresupuesto(2016)
         .then((Comparativa) => {
             this.setState({
-                datos : Comparativa
+                datos : Comparativa.data
             });
         })
         .catch((error) => {

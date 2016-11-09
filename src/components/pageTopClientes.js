@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import GridTopClientes from './gridTopClientes';
 import GraficoTop10Clientes from './graficoTop10Clientes';
+import EstadisticasService from './../services/estadisticas.js';
 
 class PageTopClientes extends Component {
      constructor(){
@@ -12,14 +13,12 @@ class PageTopClientes extends Component {
         };
     }
     componentWillMount () {
-        fetch("http://localhost:60771/api/estadisticas/TopClientes/2016/10")
-            .then((response) => {
-            return response.json()
-        })
+        EstadisticasService.
+        topClientes(2016)
         .then((TopClientes) => {
             console.log('TOPCLIENTES ', TopClientes);
             this.setState({
-                datos : TopClientes
+                datos : TopClientes.data
             });
         })
         .catch((error) => {
