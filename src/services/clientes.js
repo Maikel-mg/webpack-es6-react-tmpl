@@ -1,6 +1,5 @@
 import Axios from 'axios';
 
-
 const API_ENDPOINT = 'http://localhost:60771/api';
 
 class ClientesService {
@@ -9,7 +8,14 @@ class ClientesService {
 
         return response;
     }
+    getClientesConProyectos() {
+        let response = Axios.get(`${API_ENDPOINT}/Clientes/ClientesConProyectos?include=maikel`);
+
+        return response;
+    }
     createCliente(data) {
+
+        console.log('AXIOS' , Axios.create());        
         let response = Axios.post(`${API_ENDPOINT}/Clientes`, data);
 
         return response;

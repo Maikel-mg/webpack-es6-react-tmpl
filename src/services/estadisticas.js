@@ -6,6 +6,7 @@ const API_ENDPOINT = 'http://localhost:60771/api/estadisticas';
 class EstaditicasService {
     resumenMensual(año) {
         let response = undefined;
+        
         if(año) {
             response = Axios.get(`${API_ENDPOINT}/ResumenMensual/${año}`);
         } else {
