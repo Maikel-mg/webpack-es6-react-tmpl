@@ -7,6 +7,7 @@ import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 import DialogCliente from './clientes/dialog.js';
 import TreeClientes from './clientes/treeview.js';
 import DetailClientes from './clientes/detail.js';
+import TestAlert from './clientes/blueAlert.js';
 import DialogProyectos from './dialogoProyectos.js';
 
 import ClientesServicio from './../services/clientes.js'
@@ -57,6 +58,9 @@ class PageMaestroClientes extends Component {
                         </div>
                         <div className="col-md-1">
                             <input type="button" className="btn btn-sm btn-success" value="Añadir Cliente" style={{marginTop : '10px'}} onClick={this.onBtnAñadirClick.bind(this)} />
+                        </div>
+                        <div className="col-md-2" style={{paddingTop : '10px'}}>
+                            <TestAlert />
                         </div>
                     </div>
                     <div className="treeview row">
