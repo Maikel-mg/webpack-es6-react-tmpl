@@ -26,9 +26,11 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
+    "@blueprintjs/core": "^1.0.1",
     "ag-grid": "6.2.x",
     "ag-grid-react": "6.2.x",
     "axios": "^0.15.2",
+    "jquery": "^3.1.1",
     "moment": "^2.15.0",
     "numeral": "^1.5.3",
     "react": "^15.1.0",
@@ -37,6 +39,7 @@
     "react-dom": "^15.1.0",
     "react-router": "^2.8.1",
     "react-select": "^1.0.0-rc.2",
+    "react-treebeard": "^1.1.4",
     "recharts": "^0.14.1"
   }
 }

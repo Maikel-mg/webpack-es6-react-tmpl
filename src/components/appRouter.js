@@ -5,7 +5,8 @@ import Layout from './layout';
 import PageTopClientes from './pageTopClientes';
 import PageResumenMensual from './pageResumenMensual';
 import PageComparativaPresupuesto from './PageComparativaPresupuesto';
-import PageMaestroClientes from './PageMaestroClientes';
+//import PageMaestroClientes from './PageMaestroClientes';
+import PageMaestroClientes from './pageRealizaciones';
 
 
 class App extends Component {

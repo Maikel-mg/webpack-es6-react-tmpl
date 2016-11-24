@@ -4,7 +4,10 @@ import { AgGridReact } from "ag-grid-react";
 import axios from 'axios';
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu"; 
 
-import DialogCliente from './dialogCliente.js';
+import DialogCliente from './clientes/dialog.js';
+import TreeClientes from './clientes/treeview.js';
+import DetailClientes from './clientes/detail.js';
+import TestAlert from './clientes/blueAlert.js';
 import DialogProyectos from './dialogoProyectos.js';
 
 import ClientesServicio from './../services/clientes.js'
@@ -50,16 +53,25 @@ class PageMaestroClientes extends Component {
             return (
                 <div className="pageResumenMensual">
                     <div className="pageHeader row">
-                        <div className="col-md-10">
+                        <div className="col-md-9">
                             <h2><i className="fa fa-table"></i>Maestro de clientes</h2>
                         </div>
-                        <div className="col-md-2">
-                            <input type="button" className="btn btn-success" value="Añadir" style={{marginTop : '10px'}} onClick={this.onBtnAñadirClick.bind(this)} />
-                            <input type="button" className="btn btn-info" value="Load" style={{marginTop : '10px'}} onClick={this.getClientes.bind(this)} />
+                        <div className="col-md-1">
+                            <input type="button" className="btn btn-sm btn-success" value="Añadir Cliente" style={{marginTop : '10px'}} onClick={this.onBtnAñadirClick.bind(this)} />
+                        </div>
+                        <div className="col-md-2" style={{paddingTop : '10px'}}>
+                            <TestAlert />
                         </div>
                     </div>
-                    <div className="gridResumenMensual row">
-                        
+                    <div className="treeview row">
+                        <div className="col-md-2" style={{ "marginTop" : "15px" , height : '500px', overflow : 'auto', fontSize :' 10px'}}>
+                            <TreeClientes ref="treeviewClientes" data={this.state.datos} onNodeSelected={this.onTreeClientesNodeSelected.bind(this)}/>
+                        </div>
+                        <div className="col-md-10">
+                            <DetailClientes ref="detailClientes"  datos={this.state.clienteSeleccionado}/>
+                        </div>
+                    </div>
+                    <div className="gridResumenMensual row hide">
                         <div className="col-md-12" style={{"margin": "0px"}}>
                             <div className="ag-fresh" style={{height : '800px'}}>
                                 <AgGridReact
@@ -96,9 +108,16 @@ class PageMaestroClientes extends Component {
         console.log('onCellContextMenu', arguments);
 
     }
+
+    onTreeClientesNodeSelected (nodo) {
+        console.log('Tenemos el nodo' , nodo);
+        this.setState({
+            clienteSeleccionado : nodo 
+        });
+    }
     
     componentDidMount () {
-        this.getClientes();
+        this.getClientesConProyectos();
     }
     
     onRowValueChanged (params) {
@@ -106,7 +125,7 @@ class PageMaestroClientes extends Component {
     }
 
     onBtnAñadirClick () {
-        this.refs.dialogoProyecto.open();
+        this.refs.dialogoCliente.open();
     }
 
     getClientes () {
@@ -116,6 +135,14 @@ class PageMaestroClientes extends Component {
         .catch(this.logError.bind(this));
     }
 
+    getClientesConProyectos () {
+        ClientesServicio
+        .getClientesConProyectos()
+        .then(this.refreshData.bind(this))
+        .catch(this.logError.bind(this));
+    }
+
+
     createCliente (data) {
         ClientesServicio
         .createCliente(data)
@@ -124,9 +151,12 @@ class PageMaestroClientes extends Component {
     }
 
     refreshData (response) {
+        //console.log('Refresh', response);
         this.setState({
             datos: response.data
         });
+        //this.refs.treeviewClientes.setData(response.data);
+        //this.refs.treeviewClientes.setState({data : response.data});
     }
 
     logError (error) {
