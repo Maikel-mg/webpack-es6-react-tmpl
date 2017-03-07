@@ -3,12 +3,14 @@ import Axios from 'axios';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+import ClientesServicio from './../../services/clientes.js'
+
 class SelectClientes extends Component{
     constructor () {
         super();
         this.state = {
             multi: false,
-			value: [],
+			value: {},
         }
     }
 
@@ -30,13 +32,10 @@ class SelectClientes extends Component{
 		});
 	}
 	 getClientes () {
-         return Axios
-        .get('http://localhost:60771/api/Clientes')
+        return ClientesServicio
+        .getClientes()
         .then( (response) => {
-            var options = null;
-            console.log('LOADING OPTIONS' , options)
-            //options =   response.data.map((cliente) => {return {value : cliente.id, label : cliente.nombre} } );
-            console.log('LOADING OPTIONS' , options)
+            console.log('CARGA DE CLIENTES', response);
             return response.data;
         })
         .then((data) => {

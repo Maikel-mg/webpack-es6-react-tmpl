@@ -26,7 +26,6 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
-    "@blueprintjs/core": "^1.0.1",
     "ag-grid": "6.2.x",
     "ag-grid-react": "6.2.x",
     "axios": "^0.15.2",

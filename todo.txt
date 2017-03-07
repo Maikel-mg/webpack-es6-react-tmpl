@@ -1,0 +1,17 @@
+
+  ERRORES
+===========
+
+2017-01-13      Error en llamada a 'getClientesConProyectos' cuando mi ordenador esta apagado
+2017-01-13      No salen algunas realizaciones de GESTAMP aunque estan metidas
+2017-01-13      En la pantalla de Resumen Mensual los totales de las desviaciones no se corresponden
+                porque hay cliente que tienen datos de ingreso o realizado pero no tienen desviaciones
+
+
+    TODO
+============
+
+2017-01-13      Mantenimiento de presupuestos
+2017-01-13      Mantenimiento de realizaciones por año completo, no por año mes
+2017-01-13      Mantenimiento de realizaciones incluir una fila de total de las realizaciones por mes
+2017-01-13      Mantenimiento de clientes incluir el alta de clientes con sus proyectos

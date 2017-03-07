@@ -1,6 +1,7 @@
 import Axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:60771/api';
+//const API_ENDPOINT = 'http://localhost:60771/api';
+const API_ENDPOINT = '/api';
 
 class ClientesService {
     getClientes() {
@@ -52,6 +53,12 @@ class ClientesService {
 
         return response;
 
+    }
+
+     getProyectos() {
+        let response = Axios.get(`${API_ENDPOINT}/Proyectos`);
+
+        return response;
     }
 }
 

@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { Modal, Form, FormControl, Checkbox, ControlLabel, FormGroup, Col, Button, Popover, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import SelectClientes from './clientes/select.js';
 
-
-class dialogProyectos extends Component {
+class dialogCliente extends Component {
     constructor(params) {
         super(params);
 
@@ -23,12 +20,9 @@ class dialogProyectos extends Component {
 
     save() {
         var data = {
-            nombre : this.refs.proyecto.value,
-            idCliente : this.refs.cliente.state.value.id,
+            nombre : this.refs.cliente.value,
             activo : this.refs.activo.checked
         };
-
-        console.log('DATA SAVE', data)
 
         this.props.onSave(data);
         this.setState({ showModal: false });
@@ -60,24 +54,16 @@ class dialogProyectos extends Component {
 
                 <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Proyecto</Modal.Title>
+                    <Modal.Title>Cliente</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalEmail">
                             <Col componentClass={ControlLabel} sm={2}>
-                                cliente
+                                Cliente
                             </Col>
                             <Col sm={10}>
-                                <SelectClientes ref="cliente"/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup controlId="formHorizontalEmail">
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Proyecto
-                            </Col>
-                            <Col sm={10}>
-                                <input ref="proyecto" className="form-control" type="text " placeholder="Proyecto" defaultValue={this.state.data.proyecto} />
+                                <input ref="cliente" className="form-control" type="text " placeholder="Cliente" defaultValue={this.state.data.cliente} />
                             </Col>
                         </FormGroup>
                          <FormGroup controlId="formHorizontalPassword">
@@ -88,6 +74,7 @@ class dialogProyectos extends Component {
                                 <Checkbox inputRef={(ref) => this.refs.activo = ref} value={this.state.data.activo}/>
                             </Col>
                         </FormGroup>
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -100,4 +87,4 @@ class dialogProyectos extends Component {
     }
 }
 
-export default dialogProyectos;
+export default dialogCliente;

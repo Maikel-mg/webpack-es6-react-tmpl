@@ -1,7 +1,8 @@
 import Axios from 'axios';
 
 
-const API_ENDPOINT = 'http://localhost:60771/api/estadisticas';
+//const API_ENDPOINT = 'http://localhost:60771/api/estadisticas';
+const API_ENDPOINT = '/api/estadisticas';
 
 class EstaditicasService {
     resumenMensual(año) {

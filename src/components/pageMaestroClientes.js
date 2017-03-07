@@ -118,6 +118,7 @@ class PageMaestroClientes extends Component {
     
     componentDidMount () {
         this.getClientesConProyectos();
+      
     }
     
     onRowValueChanged (params) {
@@ -127,6 +128,8 @@ class PageMaestroClientes extends Component {
     onBtnAñadirClick () {
         this.refs.dialogoCliente.open();
     }
+
+    
 
     getClientes () {
         ClientesServicio
